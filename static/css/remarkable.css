@@ -1,0 +1,145 @@
+span.remark-tally {
+  opacity: .4;
+}
+span.remark-tally:not(.inline) {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+
+  -webkit-box-sizing: border-box;
+  /* Safari */
+
+  text-align: right;
+  float: left;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  margin-left: -60px;
+  padding-right: 5px;
+}
+span.remark-tally a {
+  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-top: -3px;
+  color: #999999;
+  text-decoration: none;
+}
+span.remark-tally.inline {
+  display: block;
+}
+span.remark-tally.right {
+  text-align: left;
+  float: right;
+  margin-left: 0;
+  margin-right: -60px;
+}
+div.remarks {
+  display: block;
+  width: 300px;
+  background: #fff;
+  position: absolute;
+  padding: 20px 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+div.remarks h1 {
+  font-size: 14px;
+  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+  line-height: 14px;
+  color: #999;
+}
+div.remarks .author {
+  font-weight: bold;
+  line-height: 30px;
+}
+div.remarks .author img {
+  height: 20px;
+  margin-bottom: -4px;
+  border-radius: 2px;
+}
+div.remarks .author .link,
+div.remarks .author a {
+  color: #999;
+  font-weight: normal;
+  text-decoration: none;
+}
+div.remarks .author a:hover {
+  text-decoration: underline;
+}
+div.remarks p {
+  margin-bottom: 10px;
+}
+div.remarks ul {
+  max-height: 400px;
+  width: 315px;
+  overflow: auto;
+  margin-bottom: 0;
+}
+div.remarks ul li {
+  border-bottom: 1px solid #ccc;
+  width: 300px;
+}
+div.remarks ul li:last-of-type {
+  border: none;
+}
+div.remarks .add-comment {
+  margin-bottom: 0;
+}
+div.remarks .add-comment .required {
+  border-color: rgba(4, 100, 156, 0.5);
+}
+div.remarks .add-comment textarea {
+  width: 300px;
+  max-width: 300px;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+}
+div.remarks .add-comment input {
+  box-sizing: border-box;
+  display: none;
+  margin: 10px 0 0 0;
+  width: 300px;
+}
+div.remarks:after,
+div.remarks:before {
+  right: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+div.remarks:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #fff;
+  border-width: 10px;
+  top: 32px;
+  margin-top: -10px;
+}
+div.remarks:before {
+  border-color: rgba(34, 34, 34, 0);
+  border-right-color: #ccc;
+  border-width: 11px;
+  top: 32px;
+  margin-top: -11px;
+}
+div.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: ' ';
+  background: rgba(0, 0, 0, 0);
+}
+.remarkable:hover .remark-tally {
+  opacity: 1;
+}
+.remarkable:hover .remark-tally a:hover {
+  background: none;
+  color: #000000;
+}

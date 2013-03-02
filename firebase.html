@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Firebase Prototype</title>
+		<link rel="stylesheet" href="static/css/prototype.css">
+		<link rel="stylesheet" href="static/css/remarkable.css">
+
+		<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+		<script src="static/js/handlebars.js"></script>
+        <script src="static/js/zepto.js"></script>
+
+		<script id="comment-template" type="text/x-handlebars-template">
+  			<li class="comment">
+                <span class="author">
+	                {{#if gravatar}}
+	  					<img src="http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="">
+	  				{{/if}}
+                    {{name}}
+                 	{{#if link}}
+                    	<span class="link">(<a href="{{link}}">{{link}}</a>)</span>
+                    {{/if}}
+                </span>
+                <span class="body">
+                    <p>{{text}}</p>
+                </span>
+          	</li>
+		</script>
+	</head>
+	<body>
+        <!-- Assuming the number 1 is the "hash" for the paragraph this box is associated with... -->
+		<div id="remarks-for-1" class="remarks">
+            <div class="add-comment">
+                <textarea data-p="1" class="comment-field required" id="" placeholder="What do you think?"></textarea>
+                <input    data-p="1" class="name required"   type="text"  placeholder="What's your name?">
+                <input    data-p="1" class="email"  type="email" placeholder="Email (optional, for Gravatar)">
+                <input    data-p="1" class="submit" type="submit" value="Add note">
+            </div>
+            <ul class="comments">
+            	
+            </ul>
+        </div>
+        <script>
+			var remarkList = new Firebase('https://remarkable.firebaseio.com/');
+            
+            $('.comment-field').keyup(function (e) {
+                var parent = $('#remarks-for-' + $(this).attr('data-p'));
+                $('input.name, input.email', parent).show();
+
+                if (!$.trim($(this).val())) $('input.name, input.email, input.submit', parent).hide();
+            });
+
+            $('input.name').keyup(function (e) {
+                var parent = $('#remarks-for-' + $(this).attr('data-p'));
+                $('input.submit', parent).show();
+
+                if (!$.trim($(this).val())) $('input.submit', parent).hide();
+            });
+
+            $('.add-comment .submit').on('click', function(e) {
+                var hash = $(this).data('p');
+                var parent = $('#remarks-for-' + hash);
+
+                var name  = $('input.name',             parent).val();
+                var text  = $('textarea.comment-field', parent).val();
+                var email = $('input.email',            parent).val();
+                var timestamp = new Date().getTime();
+
+                remarkList.push({
+                    hash: hash,
+                    name: name, 
+                    text: text, 
+                    email: email, 
+                    timestamp: timestamp
+                });
+
+                $('textarea.comment-field', parent).val('');
+                $('input', parent).hide();
+            })
+
+            // TODO: Figure out how to order these things...
+            remarkList.on('child_added', function(snapshot) {
+                var note = snapshot.val();
+
+                displayNote(note);
+            });
+
+            function displayNote(note) {
+                var source   = $("#comment-template").html();
+                var template = Handlebars.compile(source);
+                var html     = template(note);
+                $('#remarks-for-' + note.hash + ' ul').prepend(html);
+            }
+
+        </script>
+	</body>
+</html>

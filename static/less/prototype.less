@@ -1,0 +1,70 @@
+
+// Styles to make the prototype look generally nice. Not to be coupled with
+// the actual styles for the script!
+
+@import url('skeleton/base.less');
+@import url('skeleton/layout.less');
+@import url('skeleton/skeleton.less');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700');
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
+@import url(http://fonts.googleapis.com/css?family=Merienda+One);
+
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+
+	&.caps
+	{
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	&.cursive
+	{
+		font-family: "Merienda One";
+		letter-spacing:-3px;
+
+		.muted { letter-spacing:-1px; }
+	}
+
+	.muted
+	{
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		font-size: 60%;
+		opacity: .6;
+	}
+}
+
+// .centered { text-align: }
+
+hr.light { border-color: rgba(255,255,255, .3);}
+hr.dark  { border-color: rgba(  0,  0,  0, .3);}
+
+#biggie
+{
+	padding-top: 5%;
+}
+
+// These code styles are from Nathan Borror's site. They're also just generally lovely
+
+code { padding: 4px 4px; background: #eee; font-family: 'Ubuntu Mono', courier, monospace; font-size: 13px; line-height: 17px; color: #555; border-radius: 2px; }
+code.output { background: #eee; color: #444; }
+
+pre code { display: block; padding: 10px; margin: 10px 0; background: #0D232C; overflow: auto; color: #fff; }
+code.objc { background: #fff; border: 1px solid #ddd; color: #000; }
+
+.light { opacity: .4; }
+
+.red { color: #FF3A83; }
+.orange { color: #FFAA00; }
+.yellow { color: #EFE900; }
+.blue { color: #1E9AE0; }
+.green { color: #5FE461; }
+
+.pale-red { color: #EB939A; }
+.pale-yellow { color: #F6F080; }
+.pale-blue { color: #9EFFFF; }
+.pale-green { color: #9DF39F; }
