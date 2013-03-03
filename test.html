@@ -21,14 +21,31 @@
 						<a href="#" class="remark-login">Login with Facebook</a>
 						<input data-hash="{{hash}}" type="submit" value="Add note">
 					</span>
-
 	            </div>
 	            <ul class="comments">
+	            	{{#each comments}}
+	            		{{#with this}}
+	            		<li class="comment">
+			                <span class="author">
+				                {{#if image}}
+				  					<img src="http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="">
+				  				{{/if}}
+			                    {{name}}
+			                 	{{#if link}}
+			                    	<span class="link">(<a href="{{link}}">{{link}}</a>)</span>
+			                    {{/if}}
+			                </span>
+			                <span class="body">
+			                    <p>{{text}}</p>
+			                </span>
+			          	</li>
+			          	{{/with}}
+	            	{{/each}}
 	            </ul>
         	</div>
 		</script>
 		<script id="tally-template" type="text/x-handlebars-template">
-  			<span data-hash="{{hash}}" class="remark-tally">
+  			<span class="remark-tally">
 				<a href="#{{hash}}" data-hash="{{hash}}">
 					{{#if count}}
 						{{count}}
@@ -37,20 +54,6 @@
 					{{/if}}
 				</a>
 			</span>
-		</script>
-		<script id="comment-template" type="text/x-handlebars-template">
-			<li class="comment">
-                <span class="author">
-	  				<img src="http://graph.facebook.com/{{username}}/picture?width=100&height=100" alt="">
-                    {{name.first_name}} {{name.last_name}}
-                 	{{#if link}}
-                    	<span class="link">(<a href="{{link}}">{{link}}</a>)</span>
-                    {{/if}}
-                </span>
-                <span class="body">
-                    <p>{{text}}</p>
-                </span>
-          	</li>
 		</script>
 	</head>
 
@@ -168,8 +171,7 @@ FACEBOOK_SECRET_KEY <span class="orange">=</span> <span class="green">'YOUR_FACE
         <script>
         	$('article section').remarkable({
         		selector: 'p',
-        		baseRef: 'https://remarkable.firebaseio.com/',
-        		scope: 'user_photos'
+        		baseRef: 'https://remarkable.firebaseio.com/'
         	})
         </script>
 	</body>

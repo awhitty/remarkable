@@ -70,7 +70,7 @@ div.remarks
 	position: absolute;
 	padding: 20px 20px 20px 20px;
 
-	border: 1px solid #ccc;
+	border: 1px solid #aaa;
 	border-radius: 5px;
 	box-shadow: 0 2px 3px rgba(0,0,0,.2);
 
@@ -113,6 +113,7 @@ div.remarks
 		width: 315px;
 		overflow: auto;
 		margin-bottom: 0;
+		margin-top: 10px;
 
 		li
 		{
@@ -129,21 +130,75 @@ div.remarks
 		{
 			border-color: rgba(4, 100, 156, .5);
 		}
+
 		textarea 
 		{ 
 			width: 300px;
 			max-width: 300px;
 			margin-bottom: 0px;
-			// padding: 10px;
 			box-sizing:border-box;
 		}
+		
+		textarea
+		{
+			border: 1px solid #ccc;
+			padding: 6px 4px;
+			outline: none;
+			border-radius: 2px;
+			font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			color: #777;
+			background: #fff; 
+		}
 
-		input 
+		textarea:focus 
+		{
+			border: 1px solid #aaa;
+	 		color: #444;
+			box-shadow:  0 0 3px rgba(0,0,0,.2); 
+		}
+
+		textarea {
+		min-height: 60px;
+		}
+
+		input[type="submit"]
 		{ 
-			box-sizing:border-box;
-			display: none;
-			margin: 10px 0 0 0;
-			width: 300px;
+			display: block;
+			width: 100%;
+			text-align: center;
+			padding: 10px 20px;
+			margin: 10px 0;
+			background: rgba(100, 100, 100, 1);
+			color: #fff;
+
+			border-radius: 3px;
+			border: none;
+			font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			-webkit-font-smoothing: antialiased;
+			line-height: 21px;
+
+			&:active
+			{
+				background: #222;
+			}
+
+			&:hover
+			{
+				cursor: pointer;
+			}
+		}
+
+		.remark-login
+		{
+			display: block;
+			text-align: center;
+			padding: 10px 20px;
+			margin: 10px 0;
+			background: rgba(59, 89, 152, 1);
+			color: #fff;
+			text-decoration: none;
+			border-radius: 3px;
+
 		}
 
 		// text-align: right;
@@ -171,9 +226,10 @@ div.remarks
 		top: 32px;
 		margin-top: -10px;
 	}
+
 	&:before {
 		border-color: rgba(34, 34, 34, 0);
-		border-right-color: #ccc;
+		border-right-color: #aaa;
 		border-width: 11px;
 		top: 32px;
 		margin-top: -11px;
