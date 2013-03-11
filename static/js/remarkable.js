@@ -77,7 +77,7 @@
 		},
 
 		make_bindings: function(tallies, manager, options) {
-			$('body').click(function(e) {
+			$(document).click(function(e) {
 				$('.remarks').hide()
 			})
 

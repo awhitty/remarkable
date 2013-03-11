@@ -62,116 +62,18 @@
 				<hr class="dark">
 			</div>
 			<article class="sixteen columns">
-  <h3>Ghetto Facebook Registration with Django <span class="muted">(from <a href="http://nthn.me">nthn.me</a>)</span></h3>
-  <section>
-    <p>I'm going to quickly walk you through how to build a server-side Facebook registration flow with Django. This is really basic and doesn't rely on special libraries aside from httplib2 and urlib which are pretty standard.</p>
-
-    <p>ducks</p>
-    <p>ducks</p>
-
-    <p>First you need to <a href="https://developers.facebook.com/apps">create an app</a>. I set my App Domain to <code>localhost</code> and Site URL to <code>http://localhost:8000</code> for development purposes. You'll probably need to do the same if you're using Django's built in development server.</p>
-    <p>Now copy over your App ID and App Secret into your settings.py file:</p>
-<pre><code>FACEBOOK_APP_ID <span class="orange">=</span> <span class="green">'YOUR_FACEBOOK_APP_ID'</span>
-FACEBOOK_SECRET_KEY <span class="orange">=</span> <span class="green">'YOUR_FACEBOOK_APP_SECRET'</span>
-</code></pre>
-
-    <p>Now lets add a login button to your site, you can put this anywhere:</p>
-<pre><code><span class="pale-blue">&lt;a class=<span class="green">"ui-button"</span> href=<span class="green">"https://www.facebook.com/dialog/oauth?
-  client_id=<span class="pale-green">YOUR_FACEBOOK_APP_ID</span>
-  &amp;redirect_uri=http://localhost:8000/facebook/"</span>&gt;</span>Log In with Facebook<span class="pale-blue">&lt;/a&gt;</span>
-</code></pre>
-
-    <p>Don't forget to replace <code>YOUR_FACEBOOK_APP_ID</code> with your App ID. It's okay if this is hardcoded. Just make sure you don't accidentally expose your App Secret, this should not be used publicly.</p>
-    
-    <p>You'll notice we put <code>http://localhost:8000/facebook/</code> as our redirect URI in the button above. Now we need to create a view to handle this request because Facebook will hand us a "code" at that location which is what we'll need to retrieve an access token for the user, thus completing the process. Add the following to your urls.py:</p>
-
-<pre><code>url(<span class="pale-yellow">r</span><span class="green">'<span class="orange">^</span>facebook/<span class="orange">$</span>'</span>, <span class="green">'views.facebook'</span>),</code></pre>
-<img src="http://www.blogcdn.com/www.walletpop.ca/media/2012/08/turtle-ethical-ocean.jpg" class="scale-with-grid" alt="">
-
-    <p>Now add the following to your views.py:</p>
-
-<pre><code><span class="orange">import</span> httplib2
-<span class="orange">import</span> urllib
-
-<span class="orange">from</span> <span class="pale-green">django.http</span> <span class="orange">import</span> HttpResponseRedirect
-<span class="orange">from</span> <span class="pale-green">django.conf</span> <span class="orange">import</span> settings
-<span class="orange">from</span> <span class="pale-green">django.contrib.auth.models</span> <span class="orange">import</span> User
-<span class="orange">from</span> <span class="pale-green">django.contrib.auth</span> <span class="orange">import</span> authenticate, login
-<span class="orange">from</span> <span class="pale-green">django.utils</span> <span class="orange">import</span> simplejson as json
-
-<span class="orange">from</span> profiles.models <span class="orange">import</span> Profile
-
-<span class="pale-yellow">def</span> <span class="yellow">facebook</span>(<span class="orange">request</span>):
-    params <span class="orange">=</span> {
-        <span class="green">'client_id'</span>: settings.FACEBOOK_APP_ID,
-        <span class="green">'redirect_uri'</span>: <span class="green">'http://localhost:8000/registration/facebook/'</span>,
-        <span class="green">'client_secret'</span>: settings.FACEBOOK_SECRET_KEY,
-        <span class="green">'code'</span>: request.GET[<span class="green">'code'</span>]
-    }
-
-    http <span class="orange">=</span> httplib2.Http(<span class="orange">timeout=</span><span class="red">15</span>)
-    response, content <span class="orange">=</span> http.request(<span class="green">'https://graph.facebook.com/oauth/access_token?<span class="pale-green">%s</span>'</span> <span class="orange">%</span> urllib.urlencode(params))
-    
-    <span class="blue"># Find access token and expire (this is really gross)</span>
-    params <span class="orange">=</span> content.split(<span class="green">'&'</span>)
-    ACCESS_TOKEN <span class="orange">=</span> params[<span class="red">0</span>].split(<span class="green">'='</span>)[<span class="red">1</span>]
-    EXPIRE <span class="orange">=</span> params[<span class="red">1</span>].split(<span class="green">'='</span>)[<span class="red">1</span>]
-    
-    <span class="blue"># Get basic information about the person</span>
-    response, content <span class="orange">=</span> http.request(<span class="green">'https://graph.facebook.com/me?access_token=<span class="pale-green">%s</span>'</span> <span class="orange">%</span> ACCESS_TOKEN)
-    data <span class="orange">=</span> json.loads(content)
-    
-    <span class="blue"># Try to find existing profile, create a new user if one doesn't exist</span>
-    <span class="orange">try</span>:
-        profile = Profile.objects.get(<span class="orange">facebook_uid=</span>data[<span class="green">'id'</span>])
-    <span class="orange">except</span> Profile.DoesNotExist:
-        user <span class="orange">=</span> User.objects.create_user(data[<span class="green">'username'</span>], data[<span class="green">'email'</span>], data[<span class="green">'id'</span>])
-        profile <span class="orange">=</span> user.get_profile()
-        profile.facebook_uid <span class="orange">=</span> data[<span class="green">'id'</span>]
-    
-    <span class="blue"># Update token and expire fields on profile</span>
-    profile.facebook_access_token <span class="orange">=</span> ACCESS_TOKEN
-    profile.facebook_access_token_expires <span class="orange">=</span> EXPIRE
-    profile.save()
-    
-    <span class="blue"># Authenticate and log user in</span>
-    user <span class="orange">=</span> authenticate(<span class="orange">username=</span>profile.user.username, <span class="orange">password=</span>profile.facebook_uid)
-    login(request, user)
-    
-    <span class="orange">return</span> HttpResponseRedirect(<span class="green">'/'</span>)
-</code></pre>
-
-    <p>One thing you'll immediately notice is I'm importing a Profile model. All you need to do here is create a profiles app that has a single model with a foreign key to a user and some fields to store our access token and when that token expires:</p>
-    
-<pre><code><span class="orange">from</span> <span class="pale-green">django.db</span> <span class="orange">import</span> models
-<span class="orange">from</span> <span class="pale-green">django.contrib.auth.models</span> <span class="orange">import</span> User
-
-<span class="pale-yellow">class</span> <span class="yellow">Profile</span>(<span class="green">models.Model</span>):
-    user <span class="orange">=</span> <span class="pale-green">models.ForeignKey</span>(User, unique<span class="orange">=</span><span class="red">True</span>)
-
-    facebook_uid <span class="orange">=</span> <span class="pale-green">models.PositiveIntegerField</span>(blank<span class="orange">=</span><span class="red">True</span>, null<span class="orange">=</span><span class="red">True</span>)
-    facebook_access_token <span class="orange">=</span> <span class="pale-green">models.CharField</span>(blank<span class="orange">=</span><span class="red">True</span>, max_length<span class="orange">=</span><span class="red">255</span>)
-    facebook_access_token_expires <span class="orange">=</span> <span class="pale-green">models.PositiveIntegerField</span>(blank<span class="orange">=</span><span class="red">True</span>, null<span class="orange">=</span><span class="red">True</span>)
-</code></pre>
-
-    <p>And then add the following to your settings.py so you can use the "get_profile()" convenience method on user objects:</p>
-
-<pre><code><span class="orange">AUTH_PROFILE_MODULE =</span> <span class="green">'profiles.profile'</span></code></pre>
-
-    <p>There you have it. A really hacky Facebook registration flow for Django.<sup><a href="#citation_01">1</a>&nbsp;</sup></p>
-
-    <ol class="citations">
-      <li id="citation_01">Some will probably notice I didn't use the word OAuth anywhere in this post. Every time I see that term my eyes gloss over and my buzzword bullshit detector flips on. OAuth is a very simple concept that's often over explained—hopefully people can run through this tutorial and grasp what's happening by just looking at the code.</li>
-    </ol>
-  </section>
-</article>
+                <h3>Installation</h3>
+                <section>
+                    <p></p>
+                </section>
+            </article>
 		</div>
         <script>
         	$('article section').remarkable({
         		selector: 'p',
         		baseRef: 'https://remarkable.firebaseio.com/',
         		scope: 'user_photos',
-                inline_links: true
+                inline_links: false
         	})
         </script>
 	</body>
