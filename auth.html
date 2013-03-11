@@ -25,10 +25,11 @@
 	            </div>
 	            <ul class="comments">
 	            </ul>
+                <span class="homage">powered by <a href="#" >Remarkable</a></span>
         	</div>
 		</script>
 		<script id="tally-template" type="text/x-handlebars-template">
-  			<span data-hash="{{hash}}" class="remark-tally">
+  			<span data-hash="{{hash}}" class="remark-tally {{#if inline }}inline{{/if}}">
 				<a href="#{{hash}}" data-hash="{{hash}}">
 					{{#if count}}
 						{{count}}
@@ -169,7 +170,8 @@ FACEBOOK_SECRET_KEY <span class="orange">=</span> <span class="green">'YOUR_FACE
         	$('article section').remarkable({
         		selector: 'p',
         		baseRef: 'https://remarkable.firebaseio.com/',
-        		scope: 'user_photos'
+        		scope: 'user_photos',
+                inline_links: true
         	})
         </script>
 	</body>

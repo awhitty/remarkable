@@ -171,6 +171,7 @@
 				  // user authenticated with Firebase
 				  console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
 				  manager.user = user
+				  $('body').addClass('remark-logged-in')
 				} else {
 					console.log('Not logged in')
 				  // user is logged out
@@ -192,11 +193,18 @@
 
 				var source   = $("#tally-template").html()
 				var template = Handlebars.compile(source)
-				var link     = template({hash:hash})
+				var link     = template({hash:hash, inline: options.inline_links})
 
 				link = $(link)
 				item = $(item)
-				item.prepend(link)
+
+				if (options.inline_links) 
+				{
+					item.append(link)
+				} else {
+					item.prepend(link)
+				}
+
 				item.addClass('remarkable')
 				tallies.push(link)
 			})

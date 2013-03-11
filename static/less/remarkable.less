@@ -50,7 +50,7 @@ span.remark-tally
 
 	&.inline
 	{
-		display: block;
+		display: inline;
 	}
 
 	&.right
@@ -68,7 +68,7 @@ div.remarks
 	width: 300px;
 	background: #fff;
 	position: absolute;
-	padding: 20px 20px 20px 20px;
+	padding: 20px 20px 10px 20px;
 
 	border: 1px solid #aaa;
 	border-radius: 5px;
@@ -128,7 +128,7 @@ div.remarks
 	{
 		.required
 		{
-			border-color: rgba(4, 100, 156, .5);
+			// border-color: rgba(4, 100, 156, .5);
 		}
 
 		textarea 
@@ -198,15 +198,35 @@ div.remarks
 			color: #fff;
 			text-decoration: none;
 			border-radius: 3px;
-
 		}
+
+
 
 		// text-align: right;
 		margin-bottom: 0;
 	}
 
+		.homage
+	{
+		font-size: 10px;
+		color: #aaa;
+		float: right;
 
+		a
+		{
 
+			// text-transform: uppercase;
+			font-weight: bold;
+			text-decoration: none;
+			// letter-spacing: 1px;
+			color: #aaa;
+
+			&:hover
+			{
+				color: #999;
+			}
+		}
+	}
 
 	// arrow stuff...
 	&:after, &:before {
@@ -247,6 +267,11 @@ div.backdrop
 	background: rgba(0,0,0,0);
 
 
+}
+
+body.remark-logged-in .remark-login
+{
+	display: none!important;
 }
 
 .remarkable:hover

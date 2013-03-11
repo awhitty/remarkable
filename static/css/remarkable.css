@@ -27,7 +27,7 @@ span.remark-tally a {
   text-decoration: none;
 }
 span.remark-tally.inline {
-  display: block;
+  display: inline;
 }
 span.remark-tally.right {
   text-align: left;
@@ -40,7 +40,7 @@ div.remarks {
   width: 300px;
   background: #fff;
   position: absolute;
-  padding: 20px 20px 20px 20px;
+  padding: 20px 20px 10px 20px;
   border: 1px solid #aaa;
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -88,9 +88,6 @@ div.remarks ul li:last-of-type {
 }
 div.remarks .add-comment {
   margin-bottom: 0;
-}
-div.remarks .add-comment .required {
-  border-color: rgba(4, 100, 156, 0.5);
 }
 div.remarks .add-comment textarea {
   width: 300px;
@@ -145,6 +142,19 @@ div.remarks .add-comment .remark-login {
   text-decoration: none;
   border-radius: 3px;
 }
+div.remarks .homage {
+  font-size: 10px;
+  color: #aaa;
+  float: right;
+}
+div.remarks .homage a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #aaa;
+}
+div.remarks .homage a:hover {
+  color: #999;
+}
 div.remarks:after,
 div.remarks:before {
   right: 100%;
@@ -177,6 +187,9 @@ div.backdrop {
   bottom: 0;
   content: ' ';
   background: rgba(0, 0, 0, 0);
+}
+body.remark-logged-in .remark-login {
+  display: none!important;
 }
 .remarkable:hover .remark-tally {
   opacity: 1;
