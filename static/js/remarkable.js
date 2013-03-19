@@ -153,15 +153,6 @@
 		},
 
 		init: function(parent, manager, options) {
-			if (!options) {
-				options = {
-					selector: '*',
-					auth: 'facebook',
-					scope: 'picture',
-					baseRef: 'https://remarkable.firebaseio.com/'
-				}
-			}
-
 			manager.base = new Firebase(options.baseRef);
 	    	manager.auth = new FirebaseAuthClient(manager.base, function(error, user) {
 				if (error) {
@@ -182,8 +173,9 @@
 	    	// clean the url to use as a little hash in the firebase
 			var url = window.location.pathname
 			url = url.substring(1).replace('.', '-').replace('/','-')
+			if (!url) url = 'root'
 
-			manager.post = new Firebase(options.baseRef + 'posts/' + url)
+			manager.post = new Firebase(options.baseRef + 'pages/' + url)
 
 			var children = parent.children().filter(options.selector)
 			var tallies = []
@@ -211,6 +203,7 @@
 
 			manager.post.once('value', function(snapshot) {
 				var snapshot = snapshot.val()
+				if (!snapshot) return;
 				$.each(snapshot.paragraphs, function(key, value) {
 					var count = c(value)
 					$('.remark-tally[data-hash="'+key+'"] a').html(count)
@@ -230,6 +223,8 @@
 	}
 
     $.fn.remarkable = function(options){
+    	if (!options) console.log("Please pass options to Remarkable.js")
+
     	methods.init(this, manager, options)
 
      	return this

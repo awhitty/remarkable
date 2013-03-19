@@ -1,6 +1,14 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,900);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,900);
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
 
 @import url(http://fonts.googleapis.com/css?family=Merienda+One);
+
+@import url(http://fonts.googleapis.com/css?family=Changa+One);
+
+@import url(http://fonts.googleapis.com/css?family=Pacifico);
+
+@import url(http://fonts.googleapis.com/css?family=Damion);
 /*
 * Skeleton V1.2
 * Copyright 2011, Dave Gamache
@@ -264,16 +272,6 @@ hr {
 }
 /* #Links
 ================================================== */
-a,
-a:visited {
-  color: #333;
-  text-decoration: underline;
-  outline: 0;
-}
-a:hover,
-a:focus {
-  color: #000;
-}
 p a,
 p a:visited {
   line-height: inherit;
@@ -806,6 +804,7 @@ h5,
 h6 {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
+  color: #19051A !important;
 }
 h1.caps,
 h2.caps,
@@ -822,15 +821,7 @@ h3.cursive,
 h4.cursive,
 h5.cursive,
 h6.cursive {
-  font-family: "Merienda One";
-  letter-spacing: -3px;
-}
-h1.cursive .muted,
-h2.cursive .muted,
-h3.cursive .muted,
-h4.cursive .muted,
-h5.cursive .muted,
-h6.cursive .muted {
+  font-family: "Damion";
   letter-spacing: -1px;
 }
 h1 .muted,
@@ -844,17 +835,84 @@ h6 .muted {
   font-size: 60%;
   opacity: .6;
 }
+body {
+  color: #06282D !important;
+}
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #FF5482;
+}
 hr.light {
   border-color: rgba(255, 255, 255, 0.3);
 }
 hr.dark {
   border-color: rgba(0, 0, 0, 0.3);
 }
-#biggie {
-  padding-top: 5%;
+#header-box {
+  padding: 5% 0 5% 0;
+  margin-bottom: 20px;
+  background: #aed;
 }
-#biggie header {
-  padding: 20px 0;
+#header-box header {
+  padding: 20px 0 0 0;
+}
+#header-box header h1 {
+  color: #0A464F !important;
+}
+#header-box hr {
+  padding: 0;
+  margin: 0;
+}
+.triplet h4 {
+  text-align: center;
+  padding: 10px 0;
+}
+.thumbnail {
+  text-align: center;
+  display: block;
+}
+.thumbnail img {
+  height: 100px;
+}
+#hero {
+  text-align: center;
+  padding: 10% 0;
+}
+#hero h1 {
+  font-family: 'Lato';
+  font-weight: 300;
+}
+/* #Media Queries
+================================================== */
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+  
+}
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  
+}
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+  #header-box {
+    text-align: center;
+    padding: 0;
+  }
+  #header-box h1 {
+    font-size: 30px;
+  }
+  #hero {
+    text-align: left;
+  }
+}
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  
+}
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+  
 }
 code {
   padding: 4px 4px;
