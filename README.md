@@ -25,8 +25,14 @@ Just add the following imports to the `head` of your page:
 <script src="path/to/zepto.js"></script>
 <script src="path/to/handlebars.js"></script>
 
-<!-- Remarkable script and templates -->
+<!-- Remarkable styles, script, and templates -->
+<link rel="stylesheet" href="path/to/remarkable.css">
+
 <script src="path/to/remarkable.js"></script>
+
+<script src="path/to/popup-template.tmpl.js"></script>
+<script src="path/to/tally-template.tmpl.js"></script>
+<script src="path/to/comment-template.tmpl.js"></script>
 ```
 
 And include the following somewhere that will run on `$(document).ready()`

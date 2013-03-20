@@ -26,8 +26,8 @@
 		},
 
 		create_popup: function(hash, manager) {
-			var source   = $("#popup-template").html()
-			var template = Handlebars.compile(source)
+			// var source   = $("#popup-template").html()
+			var template = Handlebars.templates['popup-template.tmpl']
 			var html = template({hash:hash})
 
 			return html
@@ -63,8 +63,8 @@
 				$('.remarkable[data-hash="'+hash+'"]').append(html)
 
 				// wire the popup up to receive comments from firebase
-				var source = $('#comment-template').html()
-				var template = Handlebars.compile(source)
+				// var source = $('#comment-template').html()
+				var template = Handlebars.templates['comment-template.tmpl']
 
 				paragraphRef.on('child_added', function(snapshot) {
 					var context = snapshot.val()
@@ -83,6 +83,7 @@
 				$('a', item).click(function(e) {
 					var hash = $(this).data('hash');
 					var offset = $(this).offset()
+					$(this).removeClass('changed')
 
 					$('.remarks').hide()
 					methods.show_or_create_popup(hash, manager, offset)
@@ -147,7 +148,13 @@
             	var snapshot = snapshot.val()
 				$.each(snapshot, function(key, value) {
 					var count = c(value)
-					$('.remark-tally[data-hash="'+key+'"] a').html(count)
+					var tally = $('.remark-tally[data-hash="'+key+'"] a')
+					var original_count = tally.html()
+
+					if (count != original_count)
+					{
+						tally.html(count).addClass('changed')
+					}
 				})
             })
 
@@ -191,8 +198,8 @@
 			$.each(children, function(index, item) {
 				var hash = methods.hash(item)
 
-				var source   = $("#tally-template").html()
-				var template = Handlebars.compile(source)
+				// var source   = $("#tally-template").html()
+				var template = Handlebars.templates['tally-template.tmpl']
 				var link     = template({hash:hash})
 
 

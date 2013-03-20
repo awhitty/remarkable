@@ -11,6 +11,19 @@ span.remark-tally a {
   color: #999999;
   background: #eeeeee;
   text-decoration: none;
+  -webkit-transition: background-color 1s;
+  -webkit-transition: color .5s;
+}
+span.remark-tally a.changed {
+  background: #ff5482;
+  color: #fff;
+}
+span.remark-tally a.changed:hover {
+  background: #ff215d;
+}
+span.remark-tally a:hover {
+  background: #cccccc;
+  color: #ffffff;
 }
 div.remarks {
   box-sizing: border-box;
@@ -172,8 +185,4 @@ body.remark-logged-in .remark-login {
 }
 .remarkable:hover .remark-tally {
   opacity: 1;
-}
-.remarkable:hover .remark-tally a:hover {
-  background: #cccccc;
-  color: #ffffff;
 }

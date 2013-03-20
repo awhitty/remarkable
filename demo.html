@@ -15,49 +15,9 @@
         <script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
 
         <script src="static/js/remarkable.js"></script>
-
-        <script id="popup-template" type="text/x-handlebars-template">
-            <div id="{{hash}}" class="remarks">
-                <div data-hash="{{hash}}" class="add-comment">
-                    <textarea data-hash="{{hash}}" class="comment-field required" placeholder="What do you think?"></textarea>
-                    <span class="next-step" style="display: none;">
-                        <a href="#" class="remark-login">Login</a>
-                        <button data-hash="{{hash}}">Add note</button>
-                    </span>
-
-                </div>
-
-                <ul class="comments">
-                </ul>
-
-                {{! If you really want to remove this line, go for it, but please feel very guilty. }}
-                <div class="homage">powered by <a href="http://remarkablejs.com" >Remarkable</a></div>
-            </div>
-        </script>
-        <script id="tally-template" type="text/x-handlebars-template">
-            <span data-hash="{{hash}}" class="remark-tally {{#if inline }}inline{{/if}}">
-                <a href="#{{hash}}" data-hash="{{hash}}">
-                    {{#if count}}
-                        {{count}}
-                    {{else}}
-                        +
-                    {{/if}}
-                </a>
-            </span>
-        </script>
-        <script id="comment-template" type="text/x-handlebars-template">
-            <li class="comment">
-                <div class="info">
-                    <span class="author">
-                        <img src="http://graph.facebook.com/{{username}}/picture?width=100&height=100" alt="">
-                        {{name.first_name}} {{name.last_name}}:
-                    </span>
-                </div>
-                <span class="body">
-                    <p>{{text}}</p>
-                </span>
-            </li>
-        </script>
+        <script src="static/handlebars/popup-template.tmpl.js"></script>
+        <script src="static/handlebars/tally-template.tmpl.js"></script>
+        <script src="static/handlebars/comment-template.tmpl.js"></script>
     </head>
 
     <body>

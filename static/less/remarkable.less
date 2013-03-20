@@ -2,6 +2,7 @@
 // colors
 @bubble-background-color:       #eee;
 @bubble-background-color-hover: #ccc;
+@bubble-changed-background:     #FF5482;
 @bubble-color:       #999;
 @bubble-color-hover: #fff;
 
@@ -33,6 +34,25 @@ span.remark-tally
 		background: @bubble-background-color;
 
 		text-decoration: none;
+		-webkit-transition: background-color 1s;
+		-webkit-transition: color .5s;
+
+		&.changed
+		{
+			background: @bubble-changed-background;
+			color: #fff;
+
+			&:hover
+			{
+				background: darken(@bubble-changed-background,10%);
+			}
+		}
+
+		&:hover
+		{
+			background: @bubble-background-color-hover;
+			color: @bubble-color-hover;
+		}
 	}
 }
 
@@ -263,14 +283,5 @@ body.remark-logged-in .remark-login
 	.remark-tally
 	{
 		opacity: 1;
-
-		a
-		{ 
-			&:hover
-			{
-				background: @bubble-background-color-hover;
-				color: @bubble-color-hover;
-			}
-		}
 	}
 }
