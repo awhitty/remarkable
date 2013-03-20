@@ -16,23 +16,27 @@ Set up a Firebase and follow their [instructions](https://www.firebase.com/docs/
 ### Front-end
 Just add the following imports to the `head` of your page:
 
-	<!-- Firebase clients -->
-	<script src="https://cdn.firebase.com/v0/firebase.js"></script>
-	<script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
+```html
+<!-- Firebase clients -->
+<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+<script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
 
-	<!-- Zepto and Handlebars-->
-	<script src="path/to/zepto.js"></script>
-	<script src="path/to/handlebars.js"></script>
+<!-- Zepto and Handlebars-->
+<script src="path/to/zepto.js"></script>
+<script src="path/to/handlebars.js"></script>
 
-	<!-- Remarkable script and templates -->
-	<script src="path/to/remarkable.js"></script>
+<!-- Remarkable script and templates -->
+<script src="path/to/remarkable.js"></script>
+```
 
 And include the following somewhere that will run on `$(document).ready()`
 
-	$('YOUR CONTENT WRAPPER').remarkable({
-	    selector: 'p',
-	    baseRef: 'YOUR FIREBASE URL',
-	})
+```javascript
+$('YOUR CONTENT WRAPPER').remarkable({
+    selector: 'p',
+    baseRef: 'YOUR FIREBASE URL',
+})
+```
 
 ## Customization and configuration</h3>
 ### Aesthetics
