@@ -34,7 +34,7 @@
 		},
 
 		show_or_create_popup: function(hash, manager, offset) {
-			// find popup in DOM with has
+			// find popup in DOM with hash
 			// if it doesn't exist, make one with handlebars
 			// display it and position it 
 			var popup = $('#'+hash)
@@ -43,13 +43,11 @@
 			var paragraphRef = manager.post.child('paragraphs/'+hash)
 
 			if (popup.length > 0) {
-				popup.show().css('top', top).css('left', left)
+				popup.show()
 			} else {
 				var html = methods.create_popup(hash)
 
 				html = $(html)
-						.css('top', top)
-						.css('left', left)
 						.click(function(e) {
 							e.stopPropagation()
 						})
@@ -58,11 +56,11 @@
 					$(document).trigger('remark-login')
 				})
 
-				$('input[type="submit"]', html).click(function() {
+				$('button', html).click(function() {
 					$(document).trigger('remark-submit', this)
 				})
 
-				$('body').append(html)
+				$('.remarkable[data-hash="'+hash+'"]').append(html)
 
 				// wire the popup up to receive comments from firebase
 				var source = $('#comment-template').html()
@@ -89,7 +87,7 @@
 					$('.remarks').hide()
 					methods.show_or_create_popup(hash, manager, offset)
 					e.stopPropagation() // prevent this from bubbling up to the body
-					e.preventDefault() // don't scroll to the popup
+					e.preventDefault()  // don't scroll to the popup
 				})
 			})
 
@@ -104,6 +102,8 @@
                 if (!$.trim($(this).val())) {
                 	$('.next-step', parent).hide()
                 }
+
+                console.log($('.next-step', parent))
             });
 
 			// when a comment is submitted, format it properly and send it on
@@ -114,13 +114,19 @@
             	var parent = $('#'+hash)
             	var text = $('.comment-field', parent).val()
 
+            	if (!text) return;
+
             	var user = manager.user
+
+            	var now = new Date();
+            	// now.format("m/dd/yy");
 
             	var comment = {
             		text: text,
 
             		facebook_id: user.id,
             		username: user.username,
+            		time: now.getTime(),
             		name: {
             			first_name: user.first_name,
             			last_name: user.last_name
@@ -128,8 +134,10 @@
             	}
 
             	manager.post.child('paragraphs/'+hash).push(comment, function(e) {
-            		console.log(e)
+            		console.log("Submitted post to paragraphs/'"+hash)
             	})
+
+            	$('.comment-field', parent).val('')
             })
 
             // if comments are updated somewhere, recalculate the number of
@@ -185,17 +193,15 @@
 
 				var source   = $("#tally-template").html()
 				var template = Handlebars.compile(source)
-				var link     = template({hash:hash, inline: options.inline_links})
+				var link     = template({hash:hash})
+
 
 				link = $(link)
 				item = $(item)
+				item.data('hash', hash)
 
-				if (options.inline_links) 
-				{
-					item.append(link)
-				} else {
-					item.prepend(link)
-				}
+
+				item.append(link)
 
 				item.addClass('remarkable')
 				tallies.push(link)
@@ -205,14 +211,14 @@
 				var snapshot = snapshot.val()
 				if (!snapshot) return;
 				$.each(snapshot.paragraphs, function(key, value) {
-					var count = c(value)
+					var count = countTally(value)
 					$('.remark-tally[data-hash="'+key+'"] a').html(count)
 				})
 			})
 
 			methods.make_bindings(tallies, manager, options)
 
-			function c(obj) {
+			function countTally(obj) {
 			  var i = 0;
 			  for (var x in obj)
 			    if (obj.hasOwnProperty(x))
@@ -223,7 +229,10 @@
 	}
 
     $.fn.remarkable = function(options){
-    	if (!options) console.log("Please pass options to Remarkable.js")
+    	if (!options) { 
+    		console.log("Please pass options to Remarkable.js")
+    		return;
+    	}
 
     	methods.init(this, manager, options)
 

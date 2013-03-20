@@ -1,9 +1,12 @@
 // SETTINGS
 // colors
 @bubble-background-color:       #eee;
-@bubble-background-color-hover: none;
+@bubble-background-color-hover: #ccc;
 @bubble-color:       #999;
-@bubble-color-hover: #000;
+@bubble-color-hover: #fff;
+
+@submit-button-color: #1AAF5D;
+@login-button-color:  rgba(59, 89, 152, 1);
 
 // box size and shape
 @bubble-padding: 4px 8px;
@@ -16,63 +19,33 @@
 span.remark-tally
 {
 	opacity: .4;
-	
-	&:not(.inline)
-	{
-		box-sizing:border-box;
-		-moz-box-sizing:border-box; /* Firefox */
-		-webkit-box-sizing:border-box; /* Safari */
-	
-		text-align: right;
-		float: left;
-	
-		position: relative;
-		display: inline-block;
-	
-		width: 60px;
-		margin-left: -60px;
-		padding-right: 5px;
-	}
 
 	a
 	{
 		font-family: @comment-font;
-		font-weight: normal;
+		font-weight: bold;
 
 		font-size: 12px;
 		padding: @bubble-padding;
 		margin-top: -3px;
-		// border-radius: 60px;
+		border-radius: 3px;
 		color: @bubble-color;
+		background: @bubble-background-color;
 
 		text-decoration: none;
-	}
-
-	&.inline
-	{
-		display: inline;
-	}
-
-	&.right
-	{
-		text-align: left;
-		float: right;
-		margin-left: 0;
-		margin-right: -60px;
 	}
 }
 
 div.remarks
 {
-	display: block;
-	width: 300px;
+	box-sizing: border-box;
+	width: 100%;
 	background: #fff;
-	position: absolute;
-	padding: 20px 20px 10px 20px;
+	margin-top: 20px;
+	padding: 0;
 
-	border: 1px solid #aaa;
-	border-radius: 5px;
-	box-shadow: 0 2px 3px rgba(0,0,0,.2);
+
+	border-top: 1px solid #eee;
 
 	h1 
 	{ 
@@ -80,6 +53,12 @@ div.remarks
 		font-family: @heading-font;
 		line-height: 14px;
 		color: #999;
+	}
+
+	.info
+	{
+		color: #aaa;
+		font-size: 12px;
 	}
 
 	.author
@@ -92,6 +71,7 @@ div.remarks
 			height: 20px;
 			margin-bottom: -4px;
 			border-radius: 2px;
+			margin-right: 5px;
 		}
 
 		.link, a
@@ -110,15 +90,15 @@ div.remarks
 	ul
 	{
 		max-height: 400px;
-		width: 315px;
+		width: 100%;
 		overflow: auto;
 		margin-bottom: 0;
 		margin-top: 10px;
 
 		li
 		{
-			border-bottom: 1px solid #ccc;
-			width: 300px;
+			border-bottom: 1px solid #eee;
+			width: 100%;
 
 			&:last-of-type { border: none; }
 		}
@@ -133,53 +113,57 @@ div.remarks
 
 		textarea 
 		{ 
-			width: 300px;
-			max-width: 300px;
+			width: 100%;
+			max-width: 100%;
 			margin-bottom: 0px;
 			box-sizing:border-box;
-		}
-		
-		textarea
-		{
-			border: 1px solid #ccc;
-			padding: 6px 4px;
+
+
+			border: none;
+			padding: 10px;
 			outline: none;
-			border-radius: 2px;
-			font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			border-radius: 5px;
+			font: 14px @default-font;
 			color: #777;
-			background: #fff; 
+			background: #fafafa; 
 		}
 
 		textarea:focus 
 		{
-			border: 1px solid #aaa;
+			border: none;
 	 		color: #444;
-			box-shadow:  0 0 3px rgba(0,0,0,.2); 
+			// box-shadow:  0 1px 3px rgba(0,0,0,.1); 
 		}
 
 		textarea {
-		min-height: 60px;
+			min-height: 20px;
 		}
 
-		input[type="submit"]
+		button
 		{ 
 			display: block;
-			width: 100%;
+			width: 49%;
+			float: right;
 			text-align: center;
 			padding: 10px 20px;
 			margin: 10px 0;
-			background: rgba(100, 100, 100, 1);
+			background: @submit-button-color;
 			color: #fff;
 
 			border-radius: 3px;
 			border: none;
-			font: 13px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font: 13px @default-font;
 			-webkit-font-smoothing: antialiased;
-			line-height: 21px;
+			line-height: 20px;
+
+			&:hover
+			{
+				background: lighten(@submit-button-color, 10%);
+			}
 
 			&:active
 			{
-				background: #222;
+				background: darken(@submit-button-color, 5%);
 			}
 
 			&:hover
@@ -192,12 +176,27 @@ div.remarks
 		{
 			display: block;
 			text-align: center;
-			padding: 10px 20px;
+			float: left;
+			width: 49%;
+			padding: 10px 0;
 			margin: 10px 0;
-			background: rgba(59, 89, 152, 1);
+			background: @login-button-color;
 			color: #fff;
 			text-decoration: none;
 			border-radius: 3px;
+			font-weight: normal;
+			font: 13px @default-font;
+			line-height: 20px;
+
+			&:hover
+			{
+				background: lighten(@login-button-color, 10%);
+			}
+
+			&:active
+			{
+				background: darken(@login-button-color, 5%);
+			}
 		}
 
 
@@ -210,7 +209,7 @@ div.remarks
 	{
 		font-size: 10px;
 		color: #aaa;
-		float: right;
+		text-align: right;
 
 		a
 		{
@@ -228,32 +227,17 @@ div.remarks
 		}
 	}
 
-	// arrow stuff...
-	&:after, &:before {
-		right: 100%;
-		border: solid transparent;
-		content: " ";
-		height: 0;
-		width: 0;
-		position: absolute;
-		pointer-events: none;
-	}
-
-	&:after {
-		border-color: rgba(255, 255, 255, 0);
-		border-right-color: #fff;
-		border-width: 10px;
-		top: 32px;
-		margin-top: -10px;
-	}
-
 	&:before {
-		border-color: rgba(34, 34, 34, 0);
-		border-right-color: #aaa;
-		border-width: 11px;
-		top: 32px;
-		margin-top: -11px;
-	}
+		position: relative;
+		width: 0px;
+		top: -10px;
+		margin: 0 auto;
+	    content:" ";
+	    display:block;
+	    border-left: 20px solid transparent;
+	    border-right: 20px solid transparent;
+	    border-bottom: 10px solid #eee; 
+    }
 }
 
 div.backdrop

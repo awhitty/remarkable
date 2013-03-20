@@ -5,11 +5,8 @@
 @import url('skeleton/base.less');
 @import url('skeleton/layout.less');
 @import url('skeleton/skeleton.less');
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,900);
+@import url(http://fonts.googleapis.com/css?family=Lato:900,300,300italic);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
-@import url(http://fonts.googleapis.com/css?family=Merienda+One);
-@import url(http://fonts.googleapis.com/css?family=Changa+One);
-@import url(http://fonts.googleapis.com/css?family=Pacifico);
 @import url(http://fonts.googleapis.com/css?family=Damion);
 
 
@@ -45,6 +42,25 @@ h1, h2, h3, h4, h5, h6
 	}
 }
 
+.serration(@top-color, @bottom-color, @top, @height: 36px)
+{
+	&:after {
+		content: " ";
+		display:block;
+		position: relative;
+		top:@top;
+		left:0px;
+		width:100%;
+		height:36px;
+		background: linear-gradient(@top-color 0%, transparent 0%), linear-gradient(135deg, @bottom-color 33.33%, transparent 33.33%) 0 0%, @bottom-color linear-gradient(45deg, @bottom-color 33.33%, @top-color 33.33%) 0 0%;
+		background: -webkit-linear-gradient(@top-color 0%, transparent 0%), -webkit-linear-gradient(135deg, @bottom-color 33.33%, transparent 33.33%) 0 0%, @bottom-color -webkit-linear-gradient(45deg, @bottom-color 33.33%, @top-color 33.33%) 0 0%;
+		background: -o-linear-gradient(@top-color 0%, transparent 0%), -o-linear-gradient(135deg, @bottom-color 33.33%, transparent 33.33%) 0 0%, @bottom-color -o-linear-gradient(45deg, @bottom-color 33.33%, @top-color 33.33%) 0 0%;
+		background: -moz-linear-gradient(@top-color 0%, transparent 0%), -moz-linear-gradient(135deg, @bottom-color 33.33%, transparent 33.33%) 0 0%, @bottom-color -moz-linear-gradient(45deg, @bottom-color 33.33%, @top-color 33.33%) 0 0%;
+		background-repeat: repeat-x;
+		background-size: 0px 100%, 9px 27px, 9px 27px;
+	}
+}
+
 body
 {
 	color: #06282D !important;
@@ -59,7 +75,7 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 
 #header-box
 {
-	padding: 5% 0 5% 0;
+	padding: 100px 0;
 	margin-bottom: 20px;
 	background: #aed;
 	// border-bottom: 1px solid #FFFDC2;
@@ -69,6 +85,23 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 		padding: 20px 0 0 0;
 
 		h1 { color: #0A464F !important; }
+
+		#back
+		{
+			line-height: 53px;
+
+			a
+			{
+				padding: 10px;
+				border-radius: 5px;
+				color: lighten(#0A464F,10%);
+
+				&:hover
+				{
+					background: lighten(#aed, 10%);
+				}
+			}
+		}
 	}
 
 	hr
@@ -76,9 +109,17 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 		padding: 0;
 		margin: 0;
 	}
+
+	.serration(#aed, #fff, 100px);
+
+	&.skinny
+	{
+		padding: 0;
+		.serration(#aed, #fff, 0);
+	}
 }
 
-.triplet
+.blocklet
 {
 	h4
 	{
@@ -98,16 +139,70 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 	}
 }
 
+section
+{
+	margin-top: 30px;
+}
+
 #hero
 {
 	text-align: center;
-	padding: 10% 0;
+	padding: 40px 0 60px 0;
 
 	h1
 	{
 		font-family: 'Lato';
 		font-weight: 300;
+		font-style: italic;
+		padding: 0 20px;
 	}
+}
+
+#links-container
+{
+	margin-top: 80px;
+	#links{
+		text-align: center;
+
+		.big-button
+		{
+			border-radius: 5px;
+			padding: 40px;
+			background: #AAEEDD;
+			color: #0A464F;
+
+			&:first-of-type
+			{
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+
+			&:last-of-type
+			{
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+
+			&:hover
+			{
+				background: darken(#AAEEDD, 10%);
+			}
+
+			&:active
+			{
+				background: lighten(#AAEEDD, 5%);
+			}
+		}
+	}
+}
+
+footer
+{
+	.serration(#fff, #0A464F, -105px);
+	margin-top: 100px;
+	padding: 50px 0 30px 0;
+	background: #0A464F;
+	color: #FFFDC2;
 }
 
 /* #Media Queries
@@ -123,19 +218,29 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 @media only screen and (max-width: 767px) {
 	#header-box
 	{
-		text-align: center;
 		padding: 0;
 
 		h1
 		{
 			font-size: 30px;
 		}
+
+		.serration(#aed, #fff, 0px);
 	}
 
 	#hero
 	{
 		text-align: left;
+
+		h1 {padding:0;}
 	}
+
+	h4
+	{
+		text-align: center;
+	}
+
+	.big-button { padding: 20px!important; }
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -143,24 +248,3 @@ hr.dark  { border-color: rgba(  0,  0,  0, .3);}
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {}
-
-// These code styles are from Nathan Borror's site. They're also just generally lovely
-
-code { padding: 4px 4px; background: #eee; font-family: 'Ubuntu Mono', courier, monospace; font-size: 13px; line-height: 17px; color: #555; border-radius: 2px; }
-code.output { background: #eee; color: #444; }
-
-pre code { display: block; padding: 10px; margin: 10px 0; background: #0D232C; overflow: auto; color: #fff; }
-code.objc { background: #fff; border: 1px solid #ddd; color: #000; }
-
-.light { opacity: .4; }
-
-.red { color: #FF3A83; }
-.orange { color: #FFAA00; }
-.yellow { color: #EFE900; }
-.blue { color: #1E9AE0; }
-.green { color: #5FE461; }
-
-.pale-red { color: #EB939A; }
-.pale-yellow { color: #F6F080; }
-.pale-blue { color: #9EFFFF; }
-.pale-green { color: #9DF39F; }

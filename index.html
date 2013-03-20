@@ -1,60 +1,12 @@
 <!doctype html>
 <html>
     <head>
-        <title>Remarkable Prototype</title>
+        <title>Remarkable.js</title>
         <link rel="stylesheet" href="static/css/prototype.css">
         <link rel="stylesheet" href="static/css/remarkable.css">
+        <link rel="icon" type="image/png" href="static/img/favicon.png">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-        <script src="static/js/zepto.js"></script>
-        <script src="static/js/handlebars.js"></script>
-
-        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-        <script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
-
-        <script src="static/js/remarkable.js"></script>
-
-        <script id="popup-template" type="text/x-handlebars-template">
-            <div id="{{hash}}" class="remarks">
-                <div data-hash="{{hash}}" class="add-comment">
-                    <textarea data-hash="{{hash}}" class="comment-field required" placeholder="What do you think?"></textarea>
-                    <span class="next-step" style="display: none;">
-                        <a href="#" class="remark-login">Login with Facebook</a>
-                        <input data-hash="{{hash}}" type="submit" value="Add note">
-                    </span>
-
-                </div>
-                <ul class="comments">
-                </ul>
-                <span class="homage">powered by <a href="#" >Remarkable</a></span>
-            </div>
-        </script>
-        <script id="tally-template" type="text/x-handlebars-template">
-            <span data-hash="{{hash}}" class="remark-tally {{#if inline }}inline{{/if}}">
-                <a href="#{{hash}}" data-hash="{{hash}}">
-                    {{#if count}}
-                        {{count}}
-                    {{else}}
-                        +
-                    {{/if}}
-                </a>
-            </span>
-        </script>
-        <script id="comment-template" type="text/x-handlebars-template">
-            <li class="comment">
-                <span class="author">
-                    <img src="http://graph.facebook.com/{{username}}/picture?width=100&height=100" alt="">
-                    {{name.first_name}} {{name.last_name}}
-                    {{#if link}}
-                        <span class="link">(<a href="{{link}}">{{link}}</a>)</span>
-                    {{/if}}
-                </span>
-                <span class="body">
-                    <p>{{text}}</p>
-                </span>
-            </li>
-        </script>
     </head>
 
     <body>
@@ -68,53 +20,48 @@
         <div id="body-box">
             <div id="content" class="container">
                 <div id="hero" class="sixteen columns">
-                    <h1>Realtime inline commenting for dynamic online content</h1>
+                    <h1>Realtime inline commenting for thoughtful online content</h1>
                 </div>
-                <div class="triplet one-third column">
+                <div class="blocklet one-third column">
                         <div class="thumbnail">
                             <img src="static/img/infinity.png" alt="">
                         </div>
                         <h4>Simple yet powerful</h4>
-                        <p>Remarkable.js is a simple inline commenting platform powered by <a href="http://firebase.com">Firebase</a> that allows users to converse about your content in realtime.</p>
+                        <p>Remarkable is a simple inline commenting platform powered by <a href="https://firebase.com">Firebase</a> that allows users to converse about your content in realtime.</p>
                     </div>
-                <div class="triplet one-third column">
+                <div class="blocklet one-third column">
                     <div class="thumbnail">
                         <img src="static/img/time.png" alt="">
                     </div>
                     <h4>Painless setup</h4>
-                    <p>Built with the <a href="http://firebase.com">Firebase API</a>, Remarkable.js is a quick drop-in to add a rich layer of interaction without the hassle of another backend. Just set up a Firebase, and you're ready to go!</p>
+                    <p>Built with the <a href="https://www.firebase.com/docs/">Firebase API</a>, Remarkable is a quick drop-in to add a rich layer of interaction without the hassle of another backend. Just set up a Firebase, and you're set!</p>
                 </div>
-                <div class="triplet one-third column">
+                <div class="blocklet one-third column">
                     <div class="thumbnail">
                         <img src="static/img/gift.png" alt="">
                     </div>
                     <h4>Free and open source</h4>
-                    <p>Like all good things in life, Remarkable.js is free. </p>
+                    <p>Like all good things in life, Remarkable is free. Though Firebase has a few pricing tiers, Remarkable typically fits the usage requirements for the free tier.</p>
                 </div>
-                <article class="sixteen columns">
-                    <section class="sixteen columns alpha omega">
-                        <h3>Installation</h3>
-                        <h4>Backend</h4>
-                        <h4>Front-end</h4>
-                        <p>Just add the following code to the <code>head</code> of your page:</p>
-                        <pre><code><span class="red">$</span>('<span class="pale-yellow">article section</span>').remarkable({
-    <span class="pale-blue">selector</span>: '<span class="pale-yellow">p</span>',
-    <span class="pale-blue">baseRef</span>: '<span class="pale-yellow">https://remarkable.firebaseio.com/</span>',
-    <span class="pale-blue">scope</span>: '<span class="pale-yellow">user_photos</span>',
-    <span class="pale-blue">inline_links</span>: <span class="pale-green">true</span>
-})</code></pre>
-                    </section>
-                    <section class="sixteen columns alpha omega">
-                        <h3>Customizing</h3>
-                        <h4>Aesthetics</h4>
-                    </section>
-                </article>
+            </div>
+            <div id="links-container" class="container">
+                <div id="links">
+                    <a href="#" class="big-button">Demo</a>
+                    <a href="https://github.com/AWhitty/remarkable" class="big-button">Clone on Github</a>
+                </div>
             </div>
         </div>
+        <footer>
+            <div id="footer-container" class="container">
+                <div class="sixteen columns">
+                    With love, from <a href="http://awhitty.me">Austin Whittier</a>
+                </div>
+            </div>
+        </footer>
 
 
         <script>
-            $('div').remarkable({
+            $('section').add('.blocklet').remarkable({
                 selector: 'p',
                 baseRef: 'https://remarkable.firebaseio.com/',
                 scope: 'user_photos',

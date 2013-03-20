@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Remarkable.js Demo</title>
+        <link rel="stylesheet" href="static/css/prototype.css">
+        <link rel="stylesheet" href="static/css/remarkable.css">
+        <link rel="icon" type="image/png" href="static/img/favicon.png">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <script src="static/js/zepto.js"></script>
+        <script src="static/js/handlebars.js"></script>
+
+        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+        <script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
+
+        <script src="static/js/remarkable.js"></script>
+
+        <script id="popup-template" type="text/x-handlebars-template">
+            <div id="{{hash}}" class="remarks">
+                <div data-hash="{{hash}}" class="add-comment">
+                    <textarea data-hash="{{hash}}" class="comment-field required" placeholder="What do you think?"></textarea>
+                    <span class="next-step" style="display: none;">
+                        <a href="#" class="remark-login">Login</a>
+                        <button data-hash="{{hash}}">Add note</button>
+                    </span>
+
+                </div>
+
+                <ul class="comments">
+                </ul>
+
+                {{! If you really want to remove this line, go for it, but please feel very guilty. }}
+                <div class="homage">powered by <a href="http://remarkablejs.com" >Remarkable</a></div>
+            </div>
+        </script>
+        <script id="tally-template" type="text/x-handlebars-template">
+            <span data-hash="{{hash}}" class="remark-tally {{#if inline }}inline{{/if}}">
+                <a href="#{{hash}}" data-hash="{{hash}}">
+                    {{#if count}}
+                        {{count}}
+                    {{else}}
+                        +
+                    {{/if}}
+                </a>
+            </span>
+        </script>
+        <script id="comment-template" type="text/x-handlebars-template">
+            <li class="comment">
+                <div class="info">
+                    <span class="author">
+                        <img src="http://graph.facebook.com/{{username}}/picture?width=100&height=100" alt="">
+                        {{name.first_name}} {{name.last_name}}:
+                    </span>
+                </div>
+                <span class="body">
+                    <p>{{text}}</p>
+                </span>
+            </li>
+        </script>
+    </head>
+
+    <body>
+        <div id="header-box" class="skinny">
+            <header class="container">
+                <div id="back" class="two columns">
+                    <a href="/">&larr; Back</a>
+                </div>
+                <div id="logo" class="fourteen columns">
+                    <h1 class="cursive">Remarkable.js <span class="muted">(demo)</span></h1>
+                </div>
+            </header>
+        </div>
+
+        <div id="body-box">
+            <div id="content" class="container">
+                <article class="sixteen columns">
+                    <p>Lorem ipsum dolor sit amet, ei cum idque facete persecuti, vim tation deleniti ne. Mei cibo reque civibus an, in mea nullam omnium. Et est sumo diam platonem! Labores ocurreret sit an</p>
+                    <p>Mei cu lorem verear, cu eum prima utamur alienum! Te eam scripta accusata explicari, ea doctus voluptaria consetetur cum? Sit dicunt blandit at, usu nisl detracto definitiones ne. Ei quando facilis est, eos eu minim suscipiantur. Id eam illum nonumy eligendi</p>
+                    <p>Ea mel omittam evertitur. Utinam scripserit cu nam, pro ei utinam nominati vituperata! Usu te wisi percipitur adversarium. Nam mutat molestiae id. Labitur luptatum euripidis eu nec, has ut option prompta propriae. Ius molestie accusata comprehensam no, impetus numquam delicatissimi vel in. Commodo graecis pertinacia ex eos, ne deseruisse moderatius eum, falli phaedrum vis cu</p>
+                    <p>Appetere accusata et mel, porro liber delicatissimi has te, ne dicat aliquando instructior has. Eum dolore vidisse an, eu senserit repudiare eam, iudico aeterno delectus ei eum. Te quo dolore constituam! Id putant impedit vituperata vel. Ea vis ferri zril delenit</p>
+                    <p>Vix dicat summo iusto eu, no suas malis pri, possit veritus voluptatibus nam at! An idque iriure qualisque eam, te cum duis tantas homero. Putant tamquam no eos, qui ne quidam forensibus moderatius? Putant oporteat per at, vel nulla vivendo interpretaris ad</p>
+                    <p>Fugit incorrupte ius ad, ad vix hinc aliquip definitiones, sit exerci scripserit an? Ut sea nullam petentium, timeam suscipit lucilius ne duo! Wisi magna vis ne, at quando torquatos vix, vidit regione necessitatibus id eam. Justo hendrerit sea no. Usu ea agam regione, eos alia civibus comprehensam cu. Quando ridens ex vel, qui natum appetere constituam eu</p>
+                    <p>An nec utinam mollis, mel modus lobortis antiopam ne. Meis aeterno omittam ne quo, diceret gloriatur has id, no vis malorum scribentur. His diam nihil feugiat at, nusquam lucilius te mei. Sit in porro possim concludaturque, ex pro nisl doming evertitur</p>
+                    <p>Cu pro phaedrum invenire tincidunt. Et has omnium hendrerit, ei vis fabellas repudiare accommodare, denique expetendis ei cum. Ad cum delenit interesset, eu nostro delenit principes sit? Omnesque assentior te sea, debet error nec ea, cu amet neglegentur sed. Usu dolore recteque erroribus eu</p>
+                    <p>Ex ius invenire patrioque, usu ferri elitr omittam ad, his voluptaria argumentum et! Falli minim usu cu. Cu viris appetere assentior eos! Commodo malorum maiestatis in nec</p>
+                    <p>Eum te dolorem corrumpit argumentum, ei ullum incorrupte pro! Vis ex omnes labore, ex odio persius duo, audiam tamquam vel cu! Vitae iudicabit explicari duo eu. Voluptua splendide et vis, vidit instructior sed ne. Sonet choro vocent no sit, qui ad iusto imperdiet! Sed quis minimum contentiones in, mea ea modus erant, ad aeque vivendo mel?</p>
+                </article>
+            </div>
+        </div>
+
+        <footer>
+            <div id="footer-container" class="container">
+                <div class="sixteen columns">
+                    With love, from <a href="http://awhitty.me">Austin Whittier</a>
+                </div>
+            </div>
+        </footer>
+
+
+        <script>
+            $('article').remarkable({
+                selector: 'p',
+                baseRef: 'https://remarkable.firebaseio.com/',
+                scope: 'user_photos',
+                inline_links: true
+            })
+        </script>
+    </body>
+</html>
