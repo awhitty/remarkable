@@ -11,7 +11,7 @@ Realtime inline commenting for thoughtful online content
 4. [Less](http://lesscss.org) (optional, for compiling CSS)
                            
 ### Backend
-Set up a Firebase and follow their [instructions](https://www.firebase.com/docs/security/simple-login-facebook.html) to set up a Facebook app for logging users in.
+1. Set up a Firebase and prepare to use the URL for your data when setting up Remarkable.
                         
 ### Front-end
 Just add the following imports to the `head` of your page:
@@ -19,7 +19,6 @@ Just add the following imports to the `head` of your page:
 ```html
 <!-- Firebase clients -->
 <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-<script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
 
 <!-- Zepto and Handlebars-->
 <script src="path/to/zepto.js"></script>
@@ -29,10 +28,7 @@ Just add the following imports to the `head` of your page:
 <link rel="stylesheet" href="path/to/remarkable.css">
 
 <script src="path/to/remarkable.js"></script>
-
-<script src="path/to/popup-template.tmpl.js"></script>
-<script src="path/to/tally-template.tmpl.js"></script>
-<script src="path/to/comment-template.tmpl.js"></script>
+<script src="path/to/templates.js"></script>
 ```
 
 And include the following somewhere that will run on `$(document).ready()`
