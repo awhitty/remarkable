@@ -103,11 +103,12 @@
             	var hash = $(source).data('hash')
             	var parent = $('#'+hash)
             	var text = $('.comment-field', parent).val()
-            	var user_name  = $('.name',  parent).val()
-            	var user_email = $('.email', parent).val()
-            	user_email = calcMD5($.trim(user_email))
+            	var user_name  = $.trim($('.name',  parent).val())
+            	var user_email = $.trim($('.email', parent).val())
 
-            	if (!text) return;
+            	if (!(text&&user_name&&user_email)) return;
+            	user_email = calcMD5(user_email)
+
 
             	var now = new Date();
             	// now.format("m/dd/yy");
