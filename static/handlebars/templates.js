@@ -3,22 +3,22 @@
 templates['comment-template.hb'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<li class=\"comment\">\n    <div class=\"info\">\n        <span class=\"author\">\n            <img src=\"http://graph.facebook.com/";
-  if (stack1 = helpers.username) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.username; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += "<li class=\"comment\">\n	<div class=\"left_side\">\n			<img class=\"avatar\" src=\"http://gravatar.com/avatar/";
+  if (stack1 = helpers.email_hash) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.email_hash; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "/picture?width=100&height=100\" alt=\"\">\n            "
-    + escapeExpression(((stack1 = ((stack1 = depth0.name),stack1 == null || stack1 === false ? stack1 : stack1.first_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " "
-    + escapeExpression(((stack1 = ((stack1 = depth0.name),stack1 == null || stack1 === false ? stack1 : stack1.last_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ":\n        </span>\n    </div>\n    <span class=\"body\">\n        <p>";
-  if (stack2 = helpers.text) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.text; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "</p>\n    </span>\n</li>";
+    + "?s=128&d=retro\" alt=\"\">\n	</div>\n    <div class=\"right_side\">\n    	<div class=\"comment-info\">\n    	    <span class=\"comment-author\">\n    	        ";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ":\n    	    </span>\n    	</div>\n    	<div class=\"comment-body\">\n    	    <p>";
+  if (stack1 = helpers.text) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.text; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n    	</div>\n    </div>\n</li>";
   return buffer;
   });
 templates['popup-template.hb'] = template(function (Handlebars,depth0,helpers,partials,data) {
@@ -39,11 +39,11 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.hash) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.hash; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\" class=\"comment-field required\" placeholder=\"What do you think?\"></textarea>\n        <span class=\"next-step\" style=\"display: none;\">\n            <a href=\"#\" class=\"remark-login\">Login</a>\n            <button data-hash=\"";
+    + "\" class=\"comment-field required\" placeholder=\"What do you think?\"></textarea>\n        <span class=\"next-step\" style=\"display: none;\">\n            <div class=\"remark-login\">\n                    <input class=\"name\" type=\"text\" placeholder=\"Name\">\n                    <input class=\"email\" type=\"text\" placeholder=\"Email\">\n            </div>\n            <button data-hash=\"";
   if (stack1 = helpers.hash) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.hash; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\">Add note</button>\n        </span>\n\n    </div>\n\n    <ul class=\"comments\">\n    </ul>\n\n    "
+    + "\"><i class=\"icon-plus\"></i> Add comment</button>\n        </span>\n\n    </div>\n\n    <ul class=\"comments\">\n    </ul>\n\n    "
     + "\n    <div class=\"homage\">powered by <a href=\"http://remarkablejs.com\" >Remarkable</a></div>\n</div>";
   return buffer;
   });

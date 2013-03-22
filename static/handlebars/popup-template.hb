@@ -2,8 +2,11 @@
     <div data-hash="{{hash}}" class="add-comment">
         <textarea data-hash="{{hash}}" class="comment-field required" placeholder="What do you think?"></textarea>
         <span class="next-step" style="display: none;">
-            <a href="#" class="remark-login">Login</a>
-            <button data-hash="{{hash}}">Add note</button>
+            <div class="remark-login">
+                    <input class="name" type="text" placeholder="Name">
+                    <input class="email" type="text" placeholder="Email">
+            </div>
+            <button data-hash="{{hash}}"><i class="icon-plus"></i> Add comment</button>
         </span>
 
     </div>

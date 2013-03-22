@@ -1,11 +1,15 @@
 <li class="comment">
-    <div class="info">
-        <span class="author">
-            <img src="http://graph.facebook.com/{{username}}/picture?width=100&height=100" alt="">
-            {{name.first_name}} {{name.last_name}}:
-        </span>
+	<div class="left_side">
+			<img class="avatar" src="http://gravatar.com/avatar/{{email_hash}}?s=128&d=retro" alt="">
+	</div>
+    <div class="right_side">
+    	<div class="comment-info">
+    	    <span class="comment-author">
+    	        {{name}}:
+    	    </span>
+    	</div>
+    	<div class="comment-body">
+    	    <p>{{text}}</p>
+    	</div>
     </div>
-    <span class="body">
-        <p>{{text}}</p>
-    </span>
 </li>
