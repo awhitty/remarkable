@@ -27,7 +27,7 @@
 
 		create_popup: function(hash, manager) {
 			// var source   = $("#popup-template").html()
-			var template = Handlebars.templates['popup-template.tmpl']
+			var template = Handlebars.templates['popup-template.hb']
 			var html = template({hash:hash})
 
 			return html
@@ -64,7 +64,7 @@
 
 				// wire the popup up to receive comments from firebase
 				// var source = $('#comment-template').html()
-				var template = Handlebars.templates['comment-template.tmpl']
+				var template = Handlebars.templates['comment-template.hb']
 
 				paragraphRef.on('child_added', function(snapshot) {
 					var context = snapshot.val()
@@ -199,7 +199,7 @@
 				var hash = methods.hash(item)
 
 				// var source   = $("#tally-template").html()
-				var template = Handlebars.templates['tally-template.tmpl']
+				var template = Handlebars.templates['tally-template.hb']
 				var link     = template({hash:hash})
 
 

@@ -12,8 +12,11 @@
     <body>
         <div id="header-box">
             <header class="container">
-                <div class="sixteen columns">
+                <div class="ten columns">
                     <h1 class="cursive">Remarkable.js <span class="muted">(a prototype)</span></h1>
+                </div>
+                <div id="big-demo-button" class="six columns">
+                    <a href="demo.html" class="big-button white">Demo</a>
                 </div>
             </header>
         </div>
@@ -45,7 +48,7 @@
                 </div>
             </div>
             <div id="links-container" class="container">
-                <div id="links">
+                <div id="links" class="button-group">
                     <a href="demo.html" class="big-button">Demo</a>
                     <a href="https://github.com/AWhitty/remarkable" class="big-button">Clone on Github</a>
                 </div>
@@ -58,15 +61,5 @@
                 </div>
             </div>
         </footer>
-
-
-        <script>
-            $('section').add('.blocklet').remarkable({
-                selector: 'p',
-                baseRef: 'https://remarkable.firebaseio.com/',
-                scope: 'user_photos',
-                inline_links: true
-            })
-        </script>
     </body>
 </html>

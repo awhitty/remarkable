@@ -158,6 +158,33 @@ section
 	}
 }
 
+#big-demo-button
+{
+	text-align: right;
+	margin-top: 20px;
+
+	.big-button { background: rgba(255,255,255,.5); }
+	.big-button:hover { background: rgba(255,255,255,.8);}
+}
+
+.big-button
+{
+	border-radius: 5px;
+	padding: 40px;
+	background: #AAEEDD;
+	color: #0A464F;
+
+	&:hover
+	{
+		background: darken(#AAEEDD, 10%);
+	}
+
+	&:active
+	{
+		background: lighten(#AAEEDD, 5%);
+	}
+}
+
 #links-container
 {
 	margin-top: 80px;
@@ -166,11 +193,6 @@ section
 
 		.big-button
 		{
-			border-radius: 5px;
-			padding: 40px;
-			background: #AAEEDD;
-			color: #0A464F;
-
 			&:first-of-type
 			{
 				border-top-right-radius: 0;
@@ -181,16 +203,6 @@ section
 			{
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
-			}
-
-			&:hover
-			{
-				background: darken(#AAEEDD, 10%);
-			}
-
-			&:active
-			{
-				background: lighten(#AAEEDD, 5%);
 			}
 		}
 	}
@@ -241,6 +253,7 @@ footer
 	}
 
 	.big-button { padding: 20px!important; }
+	#big-demo-button { display: none; }
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
